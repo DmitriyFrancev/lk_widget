@@ -24,6 +24,7 @@ def mask_account_card(card_account: str) -> str:
 
 
 def get_date(date_string: str) -> str:
+    """На вход получает строку вида '2024-03-11T02:26:18.671407'. Выводит дату в формате ДД.ММ.ГГГГ"""
     date_list = date_string[0:10].split('-')
     result_date = f'{date_list[2]}.{date_list[1]}.{date_list[0]}'
     return result_date
