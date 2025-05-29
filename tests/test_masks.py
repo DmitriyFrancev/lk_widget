@@ -4,7 +4,7 @@ import pytest
 
 @pytest.mark.parametrize('value, result', [
     ("7000792289606361", "7000 79** **** 6361"),
-    ("abcd07922xzyr361", "abcd 07** **** r361"),
+    ("1234abcd07922xzyr361", "1234 ab** **** 2xzy"),
     ("", "**** **  ")
 ])
 
@@ -23,3 +23,4 @@ def test_get_mask_account(account_number):
 
 def test_get_mask_account_empty_number():
     assert get_mask_account('') == '**'
+
