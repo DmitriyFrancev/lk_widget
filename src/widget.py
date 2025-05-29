@@ -25,15 +25,9 @@ def mask_account_card(card_account: str) -> str:
 
 def get_date(date_string: str) -> str:
     """На вход получает строку вида '2024-03-11T02:26:18.671407'. Выводит дату в формате ДД.ММ.ГГГГ"""
-    date_list = date_string[0:10].split('-')
-    result_date = f'{date_list[2]}.{date_list[1]}.{date_list[0]}'
+    try:
+        date_list = date_string[0:10].split('-')
+        result_date = f'{date_list[2]}.{date_list[1]}.{date_list[0]}'
+    except IndexError:
+        return 'Некорректный формат даты'
     return result_date
-
-
-if __name__ == "__main__":
-    print(mask_account_card('Maestro 1596837868705199'))
-    print(mask_account_card('Счет 64686473678894779589'))
-    print(mask_account_card('Visa Classic 6831982476737658'))
-    print(mask_account_card('Visa Gold 5999414228426353'))
-
-    print(get_date('2024-03-11T02:26:18.671407'))
