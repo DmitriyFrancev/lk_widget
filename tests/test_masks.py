@@ -7,8 +7,7 @@ import pytest
     ("1234abcd07922xzyr361", "1234 ab** **** 2xzy"),
     ("", "**** **  ")
 ])
-
-def test_get_mask_card_number (value, result):
+def test_get_mask_card_number(value, result):
     assert get_mask_card_number(value) == result
 
 
@@ -23,4 +22,3 @@ def test_get_mask_account(account_number):
 
 def test_get_mask_account_empty_number():
     assert get_mask_account('') == '**'
-

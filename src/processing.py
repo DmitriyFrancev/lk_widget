@@ -1,4 +1,4 @@
-def filter_by_state(income_list: list[dict], state: str = 'EXECUTED') -> str|list[dict]:
+def filter_by_state(income_list: list[dict], state: str = 'EXECUTED') -> str | list[dict]:
     """Возвращает список словарей, содержащих только те словари, у которых ключ state соответствует указанному
     значению (по умолчанию EXECUTED)"""
     output_list = []
