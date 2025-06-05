@@ -17,9 +17,3 @@ def get_mask_account(account_number: str) -> str:
     """
     output_account_number = f"**{account_number[-4:]}"
     return output_account_number
-
-
-if __name__ == "__main__":
-    print(get_mask_card_number("7000792289606361"))
-    print(get_mask_card_number("0123456789012345"))
-    print(get_mask_account("73654108430135874305"))
