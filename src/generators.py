@@ -16,7 +16,7 @@ def transaction_descriptions(transactions_list: list[dict]) -> Generator[str]:
     Принимает список словарей, содержащих данные о транзакциях.
     Возвращает генератор значений ключа description.
     """
-    description_generator = (description.get('description', 'No description') for description in transactions_list )
+    description_generator = (description.get('description', 'No description') for description in transactions_list)
     return description_generator
 
 
@@ -117,10 +117,14 @@ if __name__ == '__main__':
     # tr_desc = transaction_descriptions(test_dict_list)
     # for i in range(5):
     #     print(next(tr_desc, 'No more transactions'))
+    #
+    # tr_desc1 = transaction_descriptions([{}])
+    # for i in range(5):
+    #     print(next(tr_desc1, 'No more transactions'))
 
-    for card_number in card_number_generator():
+    for card_number in card_number_generator(9999999999999997, 9999999999999999):
         print(card_number)
 
-    cards = card_number_generator(10, 12)
-    print(next(cards, 'Значения закончились'))
+    # cards = card_number_generator(10, 12)
+    # print(next(cards, 'Значения закончились'))
 
