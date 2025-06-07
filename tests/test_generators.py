@@ -3,6 +3,9 @@ import pytest
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
+# Фикстуры для проверки функций-генераторов, содержащие:
+# - тестовый список словарей с данными о транзакциях
+# - пустой тестовый список словарей
 @pytest.fixture
 def test_list_dicts() -> list[dict]:
     test_list_data = [
@@ -84,6 +87,12 @@ def test_list_dicts() -> list[dict]:
     return test_list_data
 
 
+@pytest.fixture
+def empty_list() -> list[dict]:
+    return [{}]
+
+
+# Проверка на тестовом списке словарей
 def test_filter_by_currency(test_list_dicts: list[dict]) -> None:
     expected_result = [
         {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572',
@@ -103,30 +112,57 @@ def test_filter_by_currency(test_list_dicts: list[dict]) -> None:
     assert result == expected_result
 
 
-@pytest.fixture
-def empty_list() -> list[dict]:
-    return [{}]
+# Проверка работы параметра currency_name
+def test_filter_by_currency_eur(test_list_dicts: list[dict]) -> None:
+    expected_result = [
+        {
+            'id': 873106923,
+            'state': 'EXECUTED',
+            'date': '2019-03-23T01:09:46.296404',
+            'operationAmount': {
+                'amount': '43318.34',
+                'currency': {
+                    'name': 'EUR',
+                    'code': 'EUR'
+                }
+            },
+            'description': 'Перевод организации',
+            'from': 'Visa Classic 2842878893689012',
+            'to': 'Счет 35158586384610753655'
+        }
+    ]
+    result = list(filter_by_currency(test_list_dicts, 'EUR'))
+    assert result == expected_result
 
 
+# Проверка на пустом списке словарей
 def test_empty_filtered_by_currency(empty_list: list[dict]) -> None:
     expected_result: list = []
     result = list(filter_by_currency(empty_list, 'USD'))
     assert result == expected_result
 
 
+# Проверка на тестовом списке словарей
 def test_transaction_description(test_list_dicts: list[dict]) -> None:
-    expected_result = ['Перевод организации', 'Открытие вклада', 'Перевод со счета на счет',
-                       'Перевод организации', 'Перевод организации']
+    expected_result = [
+        'Перевод организации',
+        'Открытие вклада',
+        'Перевод со счета на счет',
+        'Перевод организации',
+        'Перевод организации'
+    ]
     result = list(transaction_descriptions(test_list_dicts))
     assert result == expected_result
 
 
+# Проверка на пустом списке словарей
 def test_empty_transaction_descriptions(empty_list: list[dict]) -> None:
     expected_result = ['No description']
     result = list(transaction_descriptions(empty_list))
     assert result == expected_result
 
 
+# Параметризация для проверки функции card_number_generator
 @pytest.mark.parametrize('start_value, stop_value, result', [
     (1, 2, ['0000 0000 0000 0001', '0000 0000 0000 0002']),
     (2, 1, []),
