@@ -28,15 +28,3 @@ def log(filename=None):
     return decorator_log
 
 
-@log('log2.txt')
-def simple_sum(x, y):
-    return x + y
-
-
-@log('log2.txt')
-def simple_division(x, y):
-    return x / y
-
-
-simple_sum(3, 'fgj')
-simple_division(4, 0)
