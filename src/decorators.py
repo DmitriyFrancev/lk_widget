@@ -1,7 +1,7 @@
 from typing import Any, Callable
 
 
-def log(filename: None|str=None) -> Callable:
+def log(filename: str or None = None) -> Callable:
     """
     Принимает необязательный параметр filename. Если параметр не указан - выводит логи в консоль.
     Если указан - вывод логов осуществляется в текстовый файл.
@@ -9,9 +9,9 @@ def log(filename: None|str=None) -> Callable:
     def decorator_log(function: Any) -> Callable:
         def wrapper(*args: Any, **kwargs: Any) -> None:
             find_error = None
-
+            result = None
             try:
-                function(*args, **kwargs)
+                result = function(*args, **kwargs)
             except Exception as e:
                 find_error = f'{function.__name__} error: {type(e).__name__}. Inputs: {args},{kwargs})\n'
                 # print(find_error)
@@ -30,6 +30,6 @@ def log(filename: None|str=None) -> Callable:
                 else:
                     print(f'{function.__name__} ok\n')
 
-            return None
+            return result
         return wrapper
     return decorator_log
