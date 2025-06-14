@@ -1,13 +1,13 @@
 from typing import Any, Callable
 
 
-def log(filename: str or None = None) -> Callable:
+def log(filename: str | None = None) -> Callable:
     """
     Принимает необязательный параметр filename. Если параметр не указан - выводит логи в консоль.
     Если указан - вывод логов осуществляется в текстовый файл.
     """
     def decorator_log(function: Any) -> Callable:
-        def wrapper(*args: Any, **kwargs: Any) -> None:
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             find_error = None
             result = None
             try:
